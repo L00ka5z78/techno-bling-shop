@@ -20,7 +20,16 @@
     <!-- container -->
     <div class="container">
         <section class="display_product">
-            <table>
+
+            <!-- php logic -->
+            <?php
+            $display_product = mysqli_query($conn, "SELECT * FROM `products`");
+            // correct serial number disaly
+            $num = 1;
+
+            if (mysqli_num_rows($display_product) > 0) {
+
+                echo "<table>
                 <thead>
                     <th>Sl No</th>
                     <th>Product Image</th>
@@ -28,40 +37,38 @@
                     <th>Product Price</th>
                     <th>Action</th>
                 </thead>
-                <!-- php logic -->
-                <?php
-                $display_product = mysqli_query($conn, "SELECT * FROM `products`");
-                // correct serial number disaly
-                $num = 1;
+                <tbody>";
 
-                if (mysqli_num_rows($display_product) > 0) {
-                    // logic to fetch data
+                // logic to fetch data
 
-                    while ($row = mysqli_fetch_assoc($display_product)) {
-                        // $product_name = $row['name'];
-                ?>
-                        <!-- display table/ -->
-                        <tr>
-                            <td><?php echo $num ?></td>
-                            <td><img src="images/<?php echo $row['image'] ?>" alt=""></td>
-                            <td><?php echo $row['name'] ?></td>
-                            <td><?php echo $row['price'] ?> </td>
-                            <td>
-                                <a href="delete.php?delete=<?php echo $row['id'] ?>" onclick="return confirm('Are you sure?');" class="delete_product_btn"><i class="fas fa-trash"></i></a>
-                                <a href="" class="update_product_btn"><i class="fas fa-edit"></i></a>
-                            </td>
-                        </tr>
-                <?php
-                        // number increase each time the loop is runing again
-                        $num++;
-                    }
-                } else {
-                    echo "No products availabel";
+                while ($row = mysqli_fetch_assoc($display_product)) {
+                    // $product_name = $row['name'];
+            ?>
+                    <!-- display table/ -->
+
+
+
+                    <tr>
+                        <td><?php echo $num ?></td>
+                        <td><img src="images/<?php echo $row['image'] ?>" alt=""></td>
+                        <td><?php echo $row['name'] ?></td>
+                        <td><?php echo $row['price'] ?> </td>
+                        <td>
+                            <a href="delete.php?delete=<?php echo $row['id'] ?>" onclick="return confirm('Are you sure?');" class="delete_product_btn"><i class="fas fa-trash"></i></a>
+                            <a href="" class="update_product_btn"><i class="fas fa-edit"></i></a>
+                        </td>
+                    </tr>
+            <?php
+                    // number increase each time the loop is runing again
+                    $num++;
                 }
-                ?>
-                <tbody>
+            } else {
+                echo "<div class='empty_text' >No products availabel</div>";
+            }
+            ?>
 
-                </tbody>
+
+            </tbody>
             </table>
         </section>
     </div>
