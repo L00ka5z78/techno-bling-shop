@@ -28,17 +28,34 @@
                     <th>Product Price</th>
                     <th>Action</th>
                 </thead>
+                <!-- php logic -->
+                <?php
+                $display_product = mysqli_query($conn, "SELECT * FROM `products`");
+                if (mysqli_num_rows($display_product) > 0) {
+                    // logic to fetch data
+
+                    while ($row = mysqli_fetch_assoc($display_product)) {
+                        // $product_name = $row['name'];
+                ?>
+                        <!-- display table/ -->
+                        <tr>
+                            <td><?php echo '1' ?></td>
+                            <td><img src="images/<?php echo $row['image'] ?>" alt=""></td>
+                            <td><?php echo $row['name'] ?></td>
+                            <td><?php echo $row['price'] ?> </td>
+                            <td>
+                                <a href="" class="delete_product_btn"><i class="fas fa-trash"></i></a>
+                                <a href="" class="update_product_btn"><i class="fas fa-edit"></i></a>
+                            </td>
+                        </tr>
+                <?php
+                    }
+                } else {
+                    echo "No products availabel";
+                }
+                ?>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Image</td>
-                        <td>Laptop</td>
-                        <td>12000</td>
-                        <td>
-                            <a href="" class="delete_product_btn"><i class="fas fa-trash"></i></a>
-                            <a href="" class="update_product_btn"><i class="fas fa-edit"></i></a>
-                        </td>
-                    </tr>
+
                 </tbody>
             </table>
         </section>
