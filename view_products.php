@@ -55,7 +55,8 @@
                         <td><?php echo $row['price'] ?> </td>
                         <td>
                             <a href="delete.php?delete=<?php echo $row['id'] ?>" onclick="return confirm('Are you sure?');" class="delete_product_btn"><i class="fas fa-trash"></i></a>
-                            <a href="" class="update_product_btn"><i class="fas fa-edit"></i></a>
+                            <a href="update.php?edit=<?php echo $row['id'] ?>" class="update_product_btn">
+                                <i class="fas fa-edit"></i></a>
                         </td>
                     </tr>
             <?php
