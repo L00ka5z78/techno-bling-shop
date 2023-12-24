@@ -3,8 +3,8 @@
       <div class="header_body">
           <a href="index.php" class="logo">Technobling</a>
           <nav class="navbar">
-              <a href="">Add product</a>
-              <a href="">View Product</a>
+              <a href="index.php">Add product</a>
+              <a href="view_products.php">View Product</a>
               <a href="">Buy</a>
           </nav>
 
