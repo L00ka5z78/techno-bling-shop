@@ -17,6 +17,32 @@
 <body>
     <!-- include header -->
     <?php include("header.php") ?>
+    <!-- container -->
+    <div class="container">
+        <section class="display_product">
+            <table>
+                <thead>
+                    <th>Sl No</th>
+                    <th>Product Image</th>
+                    <th>Product Name</th>
+                    <th>Product Price</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Image</td>
+                        <td>Laptop</td>
+                        <td>12000</td>
+                        <td>
+                            <a href="" class="delete_product_btn"><i class="fas fa-trash"></i></a>
+                            <a href="" class="update_product_btn"><i class="fas fa-edit"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
 </body>
 
 </html>
