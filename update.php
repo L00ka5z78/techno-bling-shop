@@ -16,9 +16,9 @@ if (isset($_POST['update_product'])) {
 
     if ($update_products) {
         move_uploaded_file($update_product_image_tmp_name, $update_product_image_folder);
-        echo "Product updated";
+        header('Location:view_products.php');
     } else {
-        echo "Error";
+        $display_message = "error during updating product";
     }
 }
 ?>
@@ -37,6 +37,19 @@ if (isset($_POST['update_product'])) {
 
 <body>
     <?php include 'header.php' ?>
+
+    <?php
+    if (isset($display_message)) {
+        echo "<div class='display_message'>
+            <span>$display_message</span>
+            <i class='fas fa-times' onclick='this.parentElement.style.display=`none`';></i>
+        </div>";
+    }
+
+    ?>
+
+
+
     <section class="edit_container">
         <!-- php code -->
         <?php
