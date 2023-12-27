@@ -2,14 +2,20 @@
 include 'connect.php';
 
 if (isset($_POST['add_to_cart'])) {
-    $products_name = $_POST['product_name'];
-    $producs_price = $_POST['product_price'];
-    $products_image = $_POST['product_image'];
+    $products_name                  = $_POST['product_name'];
+    $producs_price                  = $_POST['product_price'];
+    $products_image                 = $_POST['product_image'];
 
-    $product_quantity = 1;
-
-    // insert cart data in cart table in db
-    $insert_products = mysqli_query($conn, "INSERT INTO `cart` (`name`, `price`, `image`, `quantity`) VALUES ('$products_name', '$producs_price', '$products_image', $product_quantity)");
+    $product_quantity               = 1;
+    // select cart data based on condition
+    $select_cart = mysqli_query($conn, "SELECT * FROM `cart` WHERE `name` = '$products_name'");
+    if (mysqli_num_rows($select_cart) > 0) {
+        $display_message[] = "Product already in cart";
+    } else {
+        // insert cart data in cart table in db
+        $insert_products = mysqli_query($conn, "INSERT INTO `cart` (`name`, `price`, `image`, `quantity`) VALUES ('$products_name', '$producs_price', '$products_image', $product_quantity)");
+        $display_message[] = "Product added to cart";
+    }
 }
 
 ?>
@@ -34,7 +40,24 @@ if (isset($_POST['add_to_cart'])) {
     <!-- header -->
     <?php include 'header.php' ?>
 
+
+
     <div class="container">
+
+        <?php
+        if (isset($display_message)) {
+
+            foreach ($display_message as $display_message) {
+                echo "
+    <div class='display_message'>
+        <span>$display_message</span>
+        <i class='fas fa-times' onclick='this.parentElement.style.display=`none`;'></i>
+    </div>
+    ";
+            };
+        }
+        ?>
+
         <section class="products">
             <h1 class="heading">Lets shop</h1>
             <div class="product_container">
