@@ -5,7 +5,14 @@ include 'connect.php';
 
 if (isset($_GET['delete'])) {
     $delete_id = $_GET['delete'];
-    $delete_query = mysqli_query($conn, "DELETE FROM `products` WHERE `id`=$delete_id")
+    $delete_query = mysqli_query($conn, "
+    DELETE 
+    FROM 
+        `products` 
+    WHERE 
+        `id`=
+        $delete_id
+    ")
         or die("Invalid query");
     if ($delete_query) {
         echo "Product deleted";

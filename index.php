@@ -1,19 +1,30 @@
 <?php include 'connect.php';
 
 if (isset($_POST['add_product'])) {
-    $product_name = $_POST['product_name'];
-    $product_price = $_POST['product_price'];
-    $product_image = $_FILES['product_image']['name'];
-    $product_image_temp_name = $_FILES['product_image']['tmp_name'];
-    $product_image_folder = 'images/' . $product_image;
+    $product_name               = $_POST['product_name'];
+    $product_price              = $_POST['product_price'];
+    $product_image              = $_FILES['product_image']['name'];
+    $product_image_temp_name    = $_FILES['product_image']['tmp_name'];
+    $product_image_folder       = 'images/' . $product_image;
 
 
-    $insert_query = mysqli_query($conn, "INSERT INTO `products` (name,price,image) VALUES('$product_name', '$product_price', '$product_image')") or die("Invalid insert");
+    $insert_query               = mysqli_query($conn, "
+        INSERT 
+        INTO
+            `products` 
+            (name,price,image) 
+        VALUES(
+            '$product_name',
+            '$product_price',
+            '$product_image'
+          )")
+        or die("Invalid insert");
+
     if ($insert_query) {
         move_uploaded_file($product_image_temp_name, $product_image_folder);
-        $display_message = "product inserted successfully";
+        $display_message        = "product inserted successfully";
     } else {
-        $display_message = "error during inserting product";
+        $display_message        = "error during inserting product";
     }
 }
 ?>
@@ -28,20 +39,12 @@ if (isset($_POST['add_product'])) {
     <title>shopping cart project</title>
     <!-- css fle -->
     <link rel="stylesheet" href="css/style.css">
-
-
-
-    <!-- https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css -->
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
     <!-- include header -->
     <?php include("header.php") ?>
-
-
-
     <!-- form section -->
     <div class="container">
         <!-- message display -->
@@ -52,9 +55,7 @@ if (isset($_POST['add_product'])) {
             <i class='fas fa-times' onclick='this.parentElement.style.display=`none`';></i>
         </div>";
         }
-
         ?>
-
         <section>
             <h3 class="heading">Add products</h3>
             <form action="" class="add_product" method="post" enctype="multipart/form-data">
@@ -66,9 +67,6 @@ if (isset($_POST['add_product'])) {
             </form>
         </section>
     </div>
-
-
-
 
     <!-- js file -->
     <script src="js/script.js"></script>
