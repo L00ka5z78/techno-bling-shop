@@ -48,12 +48,12 @@ if (isset($_POST['add_to_cart'])) {
 
                         <form action="" method="post">
                             <div class="edit_form">
-                                <img src="images/headphone.jpg" alt="">
-                                <h3>Headphone</h3>
-                                <div class="price">Price$: 11000</div>
-                                <input type="hidden" name="product_name">
-                                <input type="hidden" name="product_price">
-                                <input type="hidden" name="product_image">
+                                <img src="images/<?php echo $fetch_product['image'] ?>" alt="">
+                                <h3><?php echo $fetch_product['name'] ?></h3>
+                                <div class="price">Price: <?php echo $fetch_product['price'] ?></div>
+                                <input type="hidden" name="product_name" value="<?php echo $fetch_product['name'] ?>">
+                                <input type="hidden" name="product_price" value="<?php echo $fetch_product['price'] ?>">
+                                <input type="hidden" name="product_image" value="<?php echo $fetch_product['image'] ?>">
 
                                 <input type="submit" class="submit_btn cart_btn" value="Add to cart" name="add_to_cart">
                             </div>
