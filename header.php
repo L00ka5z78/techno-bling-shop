@@ -5,7 +5,7 @@
           <nav class="navbar">
               <a href="index.php">Add product</a>
               <a href="view_products.php">View Product</a>
-              <a href="">Buy</a>
+              <a href="shop_products.php">Shopit</a>
           </nav>
 
           <!-- shopping cart icon -->
