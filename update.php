@@ -1,5 +1,17 @@
 <?php
-include 'connect.php'; ?>
+include 'connect.php';
+//update logic
+if (isset($_POST['update_product'])) {
+    $update_product_id = $_POST['update_product_id'];
+    $update_product_name = $_POST['update_product_name'];
+    echo $update_product_name;
+
+    $update_product_price = $_POST['update_product_price'];
+    $update_product_image = $_FILES['update_product_image']['name'];
+    $update_product_image_tmp_name = $_FILES['update_product_image']['tmp_name'];
+    $update_product_image_folder = 'images/' . $update_product_image;
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,20 +36,20 @@ include 'connect.php'; ?>
             $edit_query = mysqli_query($conn, "SELECT * FROM `products` WHERE id=$edit_id");
             if (mysqli_num_rows($edit_query) > 0) {
                 $fetch_data = mysqli_fetch_assoc($edit_query);
-                $row = $fetch_data['price'];
-                echo $row;
+                // $row = $fetch_data['price'];
+                // echo $row;
 
         ?>
 
                 <!-- form     -->
                 <form action="" method="post" enctype="multipart/form-data" class="update_product product_container_box">
-                    <img src="" alt="">
-                    <input type="hidden">
-                    <input type="text" class="input_fields fields" required>
-                    <input type="number" class="input_fields fields" required>
-                    <input type="file" class="input_fields fields" required accept="image/png, image/jpg, image/jpeg">
+                    <img src="images/<?php echo $fetch_data['image'] ?>" alt="">
+                    <input type="hidden" value="<?php echo $fetch_data['id'] ?>" name="update_product_id">
+                    <input type="text" class="input_fields fields" required value="<?php echo $fetch_data['name'] ?>" name="update_product_name">
+                    <input type="number" class="input_fields fields" required value="<?php echo $fetch_data['price'] ?>" name="update_product_price">
+                    <input type="file" class="input_fields fields" required accept="image/png, image/jpg, image/jpeg" name="update_product_image">
                     <div class="btns">
-                        <input type="submit" class="edit_btn">
+                        <input type="submit" class="edit_btn" value="Update Product" name="update_product">
                         <input type="reset" id="close-edit" value="Cancel" class="cancel_btn">
                     </div>
                 </form>
