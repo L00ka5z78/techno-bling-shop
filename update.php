@@ -4,12 +4,22 @@ include 'connect.php';
 if (isset($_POST['update_product'])) {
     $update_product_id = $_POST['update_product_id'];
     $update_product_name = $_POST['update_product_name'];
-    echo $update_product_name;
+    // echo $update_product_name;
 
     $update_product_price = $_POST['update_product_price'];
     $update_product_image = $_FILES['update_product_image']['name'];
     $update_product_image_tmp_name = $_FILES['update_product_image']['tmp_name'];
     $update_product_image_folder = 'images/' . $update_product_image;
+
+    //update query
+    $update_products = mysqli_query($conn, "UPDATE `products` SET `name`='$update_product_name', `price` = '$update_product_price', `image` = '$update_product_image' WHERE `id`='$update_product_id'");
+
+    if ($update_products) {
+        move_uploaded_file($update_product_image_tmp_name, $update_product_image_folder);
+        echo "Product updated";
+    } else {
+        echo "Error";
+    }
 }
 ?>
 
