@@ -1,3 +1,15 @@
+<?php
+include 'connect.php';
+
+if (isset($_POST['add_to_cart'])) {
+    $products_name = $_POST['product_name'];
+    $producs_price = $_POST['product_price'];
+    $products_image = $_POST['product_image'];
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,25 +33,20 @@
         <section class="products">
             <h1 class="heading">Lets shop</h1>
             <div class="product_container">
-                <div class="edit_form">
-                    <img src="images/headphone.jpg" alt="">
-                    <h3>Headphone</h3>
-                    <div class="price">Price$: 11000</div>
-                    <input type="submit" class="submit_btn cart_btn" value="Add to cart">
-                </div>
+                <form action="" method="post">
+                    <div class="edit_form">
+                        <img src="images/headphone.jpg" alt="">
+                        <h3>Headphone</h3>
+                        <div class="price">Price$: 11000</div>
+                        <input type="hidden" name="product_name">
+                        <input type="hidden" name="product_price">
+                        <input type="hidden" name="product_image">
 
-                <div class="edit_form">
-                    <img src="images/headphone.jpg" alt="">
-                    <h3>Headphone</h3>
-                    <div class="price">Price$: 11000</div>
-                    <input type="submit" class="submit_btn cart_btn" value="Add to cart">
-                </div>
-                <div class="edit_form">
-                    <img src="images/headphone.jpg" alt="">
-                    <h3>Headphone</h3>
-                    <div class="price">Price$: 11000</div>
-                    <input type="submit" class="submit_btn cart_btn" value="Add to cart">
-                </div>
+                        <input type="submit" class="submit_btn cart_btn" value="Add to cart" name="add_to_cart">
+                    </div>
+
+                </form>
+
             </div>
         </section>
     </div>
