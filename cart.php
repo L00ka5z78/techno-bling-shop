@@ -19,7 +19,11 @@
         <section class="shopping_cart">
             <h1 class="heading">My cart</h1>
             <table>
-                <thead>
+
+                <?php
+                $select_cart_products = mysqli_query($conn, "SELECT * FROM `cart`");
+                if (mysqli_num_rows($select_cart_products) > 0) {
+                    echo "  <thead>
                     <th>Sl No</th>
                     <th>Product Name</th>
                     <th>Product Image</th>
@@ -28,23 +32,37 @@
                     <th>Total Price</th>
                     <th>Action</th>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Laptop</td>
-                        <td><img src="images/laptop.jpg" alt=""></td>
-                        <td>25000/-</td>
-                        <td>
-                            <div class="quantity_box">
-                                <input type="number" min="1">
-                                <input type="submit" class="update_quantity" value="Update">
-                            </div>
-                        </td>
-                        <td>25000/-</td>
-                        <td><a href="">
-                                <i class="fas fa-trash"></i>Remove
-                            </a></td>
-                    </tr>
+                <tbody>";
+
+                    while ($fetch_cart_products = mysqli_fetch_assoc($select_cart_products)) {
+                ?>
+                        <tr>
+                            <td>1</td>
+                            <td>Laptop</td>
+                            <td><img src="images/laptop.jpg" alt=""></td>
+                            <td>25000/-</td>
+                            <td>
+                                <div class="quantity_box">
+                                    <input type="number" min="1">
+                                    <input type="submit" class="update_quantity" value="Update">
+                                </div>
+                            </td>
+                            <td>25000/-</td>
+                            <td><a href="">
+                                    <i class="fas fa-trash"></i>Remove
+                                </a></td>
+                        </tr>
+                <?php
+                    }
+                } else {
+                    echo "no products";
+                }
+
+                ?>
+
+
+
+
                 </tbody>
             </table>
             <!-- bottom area -->
