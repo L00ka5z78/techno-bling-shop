@@ -22,6 +22,8 @@
 
                 <?php
                 $select_cart_products = mysqli_query($conn, "SELECT * FROM `cart`");
+                $num = 1;
+
                 if (mysqli_num_rows($select_cart_products) > 0) {
                     echo "  <thead>
                     <th>Sl No</th>
@@ -37,13 +39,13 @@
                     while ($fetch_cart_products = mysqli_fetch_assoc($select_cart_products)) {
                 ?>
                         <tr>
-                            <td>1</td>
-                            <td>Laptop</td>
-                            <td><img src="images/laptop.jpg" alt=""></td>
-                            <td>25000/-</td>
+                            <td><?php echo $num; ?></td>
+                            <td><?php echo $fetch_cart_products['name']; ?></td>
+                            <td><img src="images/<?php echo $fetch_cart_products['image']; ?>" alt=""></td>
+                            <td><?php echo $fetch_cart_products['price']; ?>/-</td>
                             <td>
                                 <div class="quantity_box">
-                                    <input type="number" min="1">
+                                    <input type="number" min="1" value="<?php echo $fetch_cart_products['quantity']; ?>">
                                     <input type="submit" class="update_quantity" value="Update">
                                 </div>
                             </td>
@@ -53,6 +55,7 @@
                                 </a></td>
                         </tr>
                 <?php
+                        $num++;
                     }
                 } else {
                     echo "no products";
