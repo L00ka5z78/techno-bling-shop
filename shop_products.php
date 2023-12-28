@@ -8,13 +8,31 @@ if (isset($_POST['add_to_cart'])) {
 
     $product_quantity               = 1;
     // select cart data based on condition
-    $select_cart = mysqli_query($conn, "SELECT * FROM `cart` WHERE `name` = '$products_name'");
+    $select_cart = mysqli_query($conn, "
+        SELECT 
+        * 
+        FROM 
+            `cart` 
+        WHERE 
+            `name` = 
+        '$products_name'
+        ");
+
     if (mysqli_num_rows($select_cart) > 0) {
-        $display_message[] = "Product already in cart";
+        $display_message[]          = "Product already in cart";
     } else {
         // insert cart data in cart table in db
-        $insert_products = mysqli_query($conn, "INSERT INTO `cart` (`name`, `price`, `image`, `quantity`) VALUES ('$products_name', '$producs_price', '$products_image', $product_quantity)");
-        $display_message[] = "Product added to cart";
+        $insert_products            = mysqli_query($conn, "
+            INSERT 
+            INTO 
+                `cart` (`name`, `price`, `image`, `quantity`) 
+            VALUES (
+                '$products_name',
+                '$producs_price', 
+                '$products_image',
+                $product_quantity)
+            ");
+        $display_message[]          = "Product added to cart";
     }
 }
 
@@ -63,9 +81,14 @@ if (isset($_POST['add_to_cart'])) {
             <div class="product_container">
 
                 <?php
-                $select_products = mysqli_query($conn, "SELECT * FROM `products`");
+                $select_products                                = mysqli_query($conn, "
+                    SELECT 
+                    * 
+                    FROM 
+                        `products`
+                    ");
                 if (mysqli_num_rows($select_products) > 0) {
-                    while ($fetch_product = mysqli_fetch_assoc($select_products)) {
+                    while ($fetch_product                       = mysqli_fetch_assoc($select_products)) {
                         // echo $fetch_product['name'];
                 ?>
 
@@ -88,8 +111,6 @@ if (isset($_POST['add_to_cart'])) {
                     echo "<div class='empty_text' >No products availabel</div>";
                 }
                 ?>
-
-
 
             </div>
         </section>

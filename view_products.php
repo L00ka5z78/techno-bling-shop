@@ -23,9 +23,14 @@
 
             <!-- php logic -->
             <?php
-            $display_product = mysqli_query($conn, "SELECT * FROM `products`");
+            $display_product            = mysqli_query($conn, "
+                SELECT 
+                * 
+                FROM 
+                    `products`
+                ");
             // correct serial number disaly
-            $num = 1;
+            $num                        = 1;
 
             if (mysqli_num_rows($display_product) > 0) {
 

@@ -10,8 +10,8 @@
 
           <!-- select query -->
           <?php
-            $select_product = mysqli_query($conn, "SELECT * FROM `cart`") or die("Invalid query");
-            $row_count = mysqli_num_rows($select_product);
+            $select_product         = mysqli_query($conn, "SELECT * FROM `cart`") or die("Invalid query");
+            $row_count              = mysqli_num_rows($select_product);
             echo $row_count;
             ?>
 

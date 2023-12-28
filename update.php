@@ -2,23 +2,32 @@
 include 'connect.php';
 //update logic
 if (isset($_POST['update_product'])) {
-    $update_product_id              = $_POST['update_product_id'];
-    $update_product_name            = $_POST['update_product_name'];
+    $update_product_id                  = $_POST['update_product_id'];
+    $update_product_name                = $_POST['update_product_name'];
     // echo $update_product_name;
 
-    $update_product_price           = $_POST['update_product_price'];
-    $update_product_image           = $_FILES['update_product_image']['name'];
-    $update_product_image_tmp_name  = $_FILES['update_product_image']['tmp_name'];
-    $update_product_image_folder    = 'images/' . $update_product_image;
+    $update_product_price               = $_POST['update_product_price'];
+    $update_product_image               = $_FILES['update_product_image']['name'];
+    $update_product_image_tmp_name      = $_FILES['update_product_image']['tmp_name'];
+    $update_product_image_folder        = 'images/' . $update_product_image;
 
     //update query
-    $update_products = mysqli_query($conn, "UPDATE `products` SET `name`='$update_product_name', `price` = '$update_product_price', `image` = '$update_product_image' WHERE `id`='$update_product_id'");
+    $update_products                    = mysqli_query($conn, "
+        UPDATE 
+            `products`
+        SET 
+            `name`='$update_product_name', 
+            `price` = '$update_product_price',
+            `image` = '$update_product_image'
+        WHERE 
+            `id`='$update_product_id'
+        ");
 
     if ($update_products) {
         move_uploaded_file($update_product_image_tmp_name, $update_product_image_folder);
         header('Location:view_products.php');
     } else {
-        $display_message = "error during updating product";
+        $display_message                = "error during updating product";
     }
 }
 ?>
@@ -54,11 +63,18 @@ if (isset($_POST['update_product'])) {
         <!-- php code -->
         <?php
         if (isset($_GET['edit'])) {
-            $edit_id = $_GET['edit'];
+            $edit_id                = $_GET['edit'];
             // echo $edit_id;
-            $edit_query = mysqli_query($conn, "SELECT * FROM `products` WHERE id=$edit_id");
+            $edit_query             = mysqli_query($conn, "
+                SELECT
+                *
+                FROM 
+                    `products` 
+                WHERE 
+                    id=$edit_id
+               ");
             if (mysqli_num_rows($edit_query) > 0) {
-                $fetch_data = mysqli_fetch_assoc($edit_query);
+                $fetch_data         = mysqli_fetch_assoc($edit_query);
                 // $row = $fetch_data['price'];
                 // echo $row;
 
