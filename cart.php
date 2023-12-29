@@ -1,4 +1,32 @@
-<?php include 'connect.php'; ?>
+<?php include 'connect.php';
+
+//update query
+if (isset($_POST['update_product_quantity'])) {
+    $update_value               = $_POST['update_quantity'];
+    // echo $update_value;
+    $update_id                  = $_POST['update_quantity_id'];
+    // echo $update_id;
+    //query
+    $update_quantity_query      = mysqli_query($conn, "
+        UPDATE 
+            `cart` 
+        SET 
+            `quantity` = 
+            $update_value 
+        WHERE 
+            `id` = 
+            $update_id
+        ");
+    // echo "update succesful";
+    if ($update_quantity_query) {
+        header("Location:cart.php");
+    }
+}
+
+
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -44,10 +72,13 @@
                             <td><img src="images/<?php echo $fetch_cart_products['image']; ?>" alt=""></td>
                             <td><?php echo $fetch_cart_products['price']; ?>/-</td>
                             <td>
-                                <div class="quantity_box">
-                                    <input type="number" min="1" value="<?php echo $fetch_cart_products['quantity']; ?>">
-                                    <input type="submit" class="update_quantity" value="Update">
-                                </div>
+                                <form action="" method="post">
+                                    <input type="hidden" value="<?php echo $fetch_cart_products['id']; ?>" name="update_quantity_id">
+                                    <div class="quantity_box">
+                                        <input type="number" min="1" value="<?php echo $fetch_cart_products['quantity']; ?>" name="update_quantity">
+                                        <input type="submit" class="update_quantity" value="Update" name="update_product_quantity">
+                                    </div>
+                                </form>
                             </td>
                             <td>25000/-</td>
                             <td><a href="">
@@ -60,11 +91,7 @@
                 } else {
                     echo "no products";
                 }
-
                 ?>
-
-
-
 
                 </tbody>
             </table>
@@ -77,7 +104,6 @@
             <a href="" class="delete_all_btn">
                 <i class="fas fa-trash">Delete all</i>
             </a>
-
         </section>
     </div>
 
