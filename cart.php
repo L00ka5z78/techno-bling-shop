@@ -29,6 +29,11 @@ if (isset($_GET['remove'])) {
     header('Location:cart.php');
 }
 
+if (isset($_GET['delete_all'])) {
+    mysqli_query($conn, "DELETE FROM `cart`");
+    header('Location:cart.php');
+}
+
 
 ?>
 
@@ -103,15 +108,25 @@ if (isset($_GET['remove'])) {
 
                 </tbody>
             </table>
+            <!-- php code  -->
             <!-- bottom area -->
-            <div class="table_bottom">
-                <a href="shop_products.php" class="bottom_btn">Continue shopping</a>
-                <h3 class="bottom_btn">Grand total: <span>$<?php echo $grand_total ?>/-</span></h3>
-                <a href="checkout.php" class="bottom_btn">Proceed to checkout</a>
-            </div>
-            <a href="" class="delete_all_btn">
-                <i class="fas fa-trash">Delete all</i>
-            </a>
+
+            <?php
+            if ($grand_total > 0) {
+                echo "<div class='table_bottom'>
+    <a href='shop_products.php' class='bottom_btn'>Continue shopping</a>
+    <h3 class='bottom_btn'>Grand total: <span>$grand_total/-</span></h3>
+    <a href='checkout.php' class='bottom_btn'>Proceed to checkout</a>
+</div>";
+            ?>
+                <a href="cart.php?delete_all" class="delete_all_btn" onclick="return confirm('ARE YOU SURE you want to delete this item?')">
+                    <i class="fas fa-trash">Delete all</i>
+                </a>
+            <?php
+            } else {
+                echo '';
+            }
+            ?>
         </section>
     </div>
 
