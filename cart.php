@@ -70,17 +70,18 @@ if (isset($_POST['update_product_quantity'])) {
                             <td><?php echo $num; ?></td>
                             <td><?php echo $fetch_cart_products['name']; ?></td>
                             <td><img src="images/<?php echo $fetch_cart_products['image']; ?>" alt=""></td>
-                            <td><?php echo $fetch_cart_products['price']; ?>/-</td>
+                            <td>$<?php echo $fetch_cart_products['price']; ?>/-</td>
                             <td>
                                 <form action="" method="post">
                                     <input type="hidden" value="<?php echo $fetch_cart_products['id']; ?>" name="update_quantity_id">
                                     <div class="quantity_box">
-                                        <input type="number" min="1" value="<?php echo $fetch_cart_products['quantity']; ?>" name="update_quantity">
+                                        <input type="number" min="1" value="<?php echo $fetch_cart_products['quantity']
+                                                                            ?>" name="update_quantity">
                                         <input type="submit" class="update_quantity" value="Update" name="update_product_quantity">
                                     </div>
                                 </form>
                             </td>
-                            <td>25000/-</td>
+                            <td>$<?php echo $subtotal = number_format($fetch_cart_products['price'] * $fetch_cart_products['quantity']) ?>/-</td>
                             <td><a href="">
                                     <i class="fas fa-trash"></i>Remove
                                 </a></td>
