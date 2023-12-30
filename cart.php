@@ -51,6 +51,7 @@ if (isset($_POST['update_product_quantity'])) {
                 <?php
                 $select_cart_products = mysqli_query($conn, "SELECT * FROM `cart`");
                 $num = 1;
+                $grand_total = 0;
 
                 if (mysqli_num_rows($select_cart_products) > 0) {
                     echo "  <thead>
@@ -87,10 +88,12 @@ if (isset($_POST['update_product_quantity'])) {
                                 </a></td>
                         </tr>
                 <?php
+                        $grand_total += ($fetch_cart_products['price'] * $fetch_cart_products['quantity']);
+                        // $grand_total = $grand_total + ($fetch_cart_products['price'] * $fetch_cart_products['quantity']);
                         $num++;
                     }
                 } else {
-                    echo "no products";
+                    echo "<div class='empty_text'>Cart is empty</div>";
                 }
                 ?>
 
@@ -99,7 +102,7 @@ if (isset($_POST['update_product_quantity'])) {
             <!-- bottom area -->
             <div class="table_bottom">
                 <a href="shop_products.php" class="bottom_btn">Continue shopping</a>
-                <h3 class="bottom_btn">Grand total: <span>25000/-</span></h3>
+                <h3 class="bottom_btn">Grand total: <span>$<?php echo $grand_total ?>/-</span></h3>
                 <a href="checkout.php" class="bottom_btn">Proceed to checkout</a>
             </div>
             <a href="" class="delete_all_btn">
