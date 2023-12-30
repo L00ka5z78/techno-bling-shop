@@ -22,8 +22,12 @@ if (isset($_POST['update_product_quantity'])) {
         header("Location:cart.php");
     }
 }
-
-
+if (isset($_GET['remove'])) {
+    $remove_id = $_GET['remove'];
+    // echo $remove_id;
+    mysqli_query($conn, "DELETE FROM `cart` WHERE `id` = $remove_id");
+    header('Location:cart.php');
+}
 
 
 ?>
@@ -83,7 +87,7 @@ if (isset($_POST['update_product_quantity'])) {
                                 </form>
                             </td>
                             <td>$<?php echo $subtotal = number_format($fetch_cart_products['price'] * $fetch_cart_products['quantity']) ?>/-</td>
-                            <td><a href="">
+                            <td><a href="cart.php?remove=<?php echo $fetch_cart_products['id'] ?>" onclick="return confirm('ARE YOU SURE you want to delete this item?')" ;>
                                     <i class="fas fa-trash"></i>Remove
                                 </a></td>
                         </tr>
